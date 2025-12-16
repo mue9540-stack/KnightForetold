@@ -8,7 +8,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Knight Foretold">
-  <meta property="og:description" content="A dark medieval action RPG inspired by fallen kingdoms and relentless combat.">
+  <meta property="og:description" content="SickingerStudio presents Knight Foretold: a dark medieval action role-playing game, inspired by fallen kingdoms and relentless combat, where intense melee gameplay is combined with a grim world and a prophecy-driven narrative. Learn more about Knight Foretold and its dark universe.">
   <meta property="og:image" content="https://mue9540-stack.github.io/KnightForetold/assets/og-discord.jpg">
   <meta property="og:url" content="https://mue9540-stack.github.io/KnightForetold/">
 
@@ -175,6 +175,16 @@
       box-shadow: 0 30px 70px rgba(0,0,0,0.9);
     }
 
+.gallery img {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.gallery img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 40px 90px rgba(0,0,0,0.95);
+}
+
     /* GAMEPLAY VIDEO */
 
     /* GAMEPLAY UI FRAME */
@@ -268,6 +278,257 @@
       .hero p { font-size: 20px; }
       .panel { padding: 36px; }
     }
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 16px;
+  border: 2px solid var(--gold-dark);
+  box-shadow: 0 40px 120px rgba(0,0,0,1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 46px;
+  color: var(--gold);
+  cursor: pointer;
+  font-family: "Cinzel", serif;
+}
+
+/* CINEMATIC DIVIDER */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  margin: 120px 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--gold-dark),
+    transparent
+  );
+}
+
+.divider-icon {
+  font-size: 28px;
+  color: var(--gold);
+  text-shadow: 0 0 18px rgba(201,164,92,0.6);
+}
+
+/* SCROLL REVEAL (safe) */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* GOLD GLINT EFFECT */
+@keyframes goldGlint {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Titles */
+h2 {
+  position: relative;
+  background: linear-gradient(
+    120deg,
+    var(--gold) 0%,
+    #fff4c1 40%,
+    var(--gold) 60%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldGlint 8s linear infinite;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after,
+.btn-secondary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,0.35) 50%,
+    transparent 70%
+  );
+  background-size: 200% auto;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover::after,
+.btn-secondary:hover::after {
+  opacity: 1;
+  animation: goldGlint 1.6s linear;
+}
+
+#character-panel {
+  margin-bottom: 120px;
+}
+
+.character-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.character-image img {
+  width: 300px;
+  border-radius: 16px;
+  border: 2px solid var(--gold-dark);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+  transition: transform 0.4s ease;
+}
+
+.character-image img:hover {
+  transform: scale(1.05);
+}
+
+.character-info {
+  flex: 1;
+  min-width: 280px;
+}
+
+.character-info h3 {
+  font-family: "Cinzel", serif;
+  color: var(--gold);
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.character-info .role {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.stats .stat {
+  margin-bottom: 12px;
+}
+
+.stats .stat span {
+  display: block;
+  color: var(--gold);
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.stats .stat-bar {
+  width: 100%;
+  height: 12px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stats .stat-bar::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: var(--value);
+  background: linear-gradient(90deg, #c9a45c, #e0c27a);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+/* Equipment */
+.equipment h4 {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  color: var(--gold);
+  font-size: 22px;
+}
+
+.equipment-items {
+  display: flex;
+  gap: 16px;
+}
+
+.equipment-items img {
+  width: 60px;
+  border-radius: 8px;
+  border: 1px solid var(--gold-dark);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.equipment-items img:hover {
+  transform: scale(1.15) rotate(-5deg);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .character-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .character-image img {
+    width: 220px;
+  }
+}
+
+
+.character-tabs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 36px;
+  justify-content: center;
+}
+
+.character-tabs .tab {
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: 1px solid var(--gold-dark);
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  font-family: "Cinzel", serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.character-tabs .tab.active {
+  background: linear-gradient(180deg, #e0c27a, #a9853c);
+  color: #1a140c;
+}
+
   </style>
 </head>
 <body>
@@ -275,7 +536,7 @@
 
   <section class="hero">
     <h1>Knight Foretold</h1>
-    <p>A dark medieval action RPG inspired by fallen kingdoms, ancient relics and relentless combat.</p>
+    <p>Journey through the haunting ruins of a shattered world, a once-proud civilization now reduced to ash and shadow. Knight Foretold is steeped in the lore of fallen kingdoms and the grim power of ancient, forgotten relics. Steel yourself for a journey of relentless combat and unforgiving challenge. Master the blade, seek out powerful secrets, and face the monstrous entities that guard the remnants of the past. Only true skill and an iron will shall survive the darkness.</p>
     <div class="hero-actions">
       <a href="" class="btn-primary">Download</a>
       <a href="#gallery" class="btn-secondary">View Screenshots</a>
@@ -305,7 +566,99 @@
       </div>
     </div>
   </section>
+  <!-- DIVIDER -->
+  <div class="section-divider">
+    <span class="divider-line"></span>
+    <span class="divider-icon">⚔</span>
+    <span class="divider-line"></span>
+  </div>
+<section class="panel" id="character-panel">
+  <h2>Heroes Overview</h2>
 
+  <!-- Tabs -->
+  <div class="character-tabs">
+    <button class="tab active" data-char="ardent">Sir Ardent</button>
+    <button class="tab" data-char="lyra">Lyra Shadowblade</button>
+    <button class="tab" data-char="garrick">Garrick Ironfist</button>
+  </div>
+
+  <!-- Character Containers -->
+  <div class="character-container" id="ardent">
+    <div class="character-image">
+      <img src="assets/hero.png" alt="Sir Ardent">
+    </div>
+    <div class="character-info">
+      <h3>Sir Ardent</h3>
+      <p class="role">Knight of the Fallen Kingdom</p>
+      <div class="stats">
+        <div class="stat"><span>Strength</span><div class="stat-bar" style="--value:80%;"></div></div>
+        <div class="stat"><span>Agility</span><div class="stat-bar" style="--value:65%;"></div></div>
+        <div class="stat"><span>Endurance</span><div class="stat-bar" style="--value:90%;"></div></div>
+        <div class="stat"><span>Intelligence</span><div class="stat-bar" style="--value:55%;"></div></div>
+      </div>
+      <div class="equipment">
+        <h4>Equipment</h4>
+        <div class="equipment-items">
+          <img src="assets/sword.png" alt="Sword">
+          <img src="assets/shield.png" alt="Shield">
+          <img src="assets/helmet.png" alt="Helmet">
+          <img src="assets/armor.png" alt="Armor">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Otro personaje -->
+  <div class="character-container" id="lyra" style="display:none;">
+    <div class="character-image">
+      <img src="assets/hero2.png" alt="Lyra Shadowblade">
+    </div>
+    <div class="character-info">
+      <h3>Lyra Shadowblade</h3>
+      <p class="role">Rogue Assassin</p>
+      <div class="stats">
+        <div class="stat"><span>Strength</span><div class="stat-bar" style="--value:55%;"></div></div>
+        <div class="stat"><span>Agility</span><div class="stat-bar" style="--value:90%;"></div></div>
+        <div class="stat"><span>Endurance</span><div class="stat-bar" style="--value:65%;"></div></div>
+        <div class="stat"><span>Intelligence</span><div class="stat-bar" style="--value:75%;"></div></div>
+      </div>
+      <div class="equipment">
+        <h4>Equipment</h4>
+        <div class="equipment-items">
+          <img src="assets/dagger.png" alt="Dagger">
+          <img src="assets/crossbow.png" alt="Crossbow">
+          <img src="assets/hood.png" alt="Hood">
+          <img src="assets/armor2.png" alt="Leather Armor">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="character-container" id="garrick" style="display:none;">
+  <div class="character-image">
+    <img src="assets/hero3.png" alt="Garrick Ironfist">
+  </div>
+  <div class="character-info">
+    <h3>Garrick Ironfist</h3>
+    <p class="role">Warrior of the Northern Tribes</p>
+
+    <div class="stats">
+      <div class="stat"><span>Strength</span><div class="stat-bar" style="--value:95%;"></div></div>
+      <div class="stat"><span>Agility</span><div class="stat-bar" style="--value:60%;"></div></div>
+      <div class="stat"><span>Endurance</span><div class="stat-bar" style="--value:85%;"></div></div>
+      <div class="stat"><span>Intelligence</span><div class="stat-bar" style="--value:50%;"></div></div>
+    </div>
+
+    <div class="equipment">
+      <h4>Equipment</h4>
+      <div class="equipment-items">
+        <img src="assets/Hammer.png" alt="Hammer">
+        <img src="assets/helmet2.png" alt="Helmet">
+        <img src="assets/armor3.png" alt="Armor">
+      </div>
+    </div>
+  </div>
+</div>
+</section>
   <section class="panel" id="gallery">
     <h2>Gallery</h2>
     <div class="gallery">
@@ -335,6 +688,80 @@
   <footer>
     © 2025 sickingerstudio · support@sickingerstudio.com
   </footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-img" src="" alt="Expanded image">
+</div>
+
+<script>
+  const galleryImages = document.querySelectorAll('.gallery img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.querySelector('.lightbox-img');
+  const lightboxClose = document.querySelector('.lightbox-close');
+
+  galleryImages.forEach(img => {
+    img.addEventListener('click', () => {
+      lightbox.style.display = 'flex';
+      lightboxImg.src = img.src;
+    });
+  });
+
+  lightboxClose.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightbox.style.display = 'none';
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      lightbox.style.display = 'none';
+    }
+  });
+
+// Scroll reveal
+const revealElements = document.querySelectorAll('.panel, .hero, .section-divider');
+
+const revealOnScroll = () => {
+  const triggerBottom = window.innerHeight * 0.85;
+
+  revealElements.forEach(el => {
+    const boxTop = el.getBoundingClientRect().top;
+
+    if (boxTop < triggerBottom) {
+      el.classList.add('visible');
+    }
+  });
+};
+
+revealElements.forEach(el => el.classList.add('reveal'));
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll();
+
+const tabs = document.querySelectorAll('.tab');
+const characters = document.querySelectorAll('.character-container');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    // Quitar activo de todas las pestañas
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // Ocultar todos los personajes
+    characters.forEach(c => c.style.display = 'none');
+
+    // Mostrar personaje seleccionado
+    const charId = tab.getAttribute('data-char');
+    document.getElementById(charId).style.display = 'flex';
+  });
+});
+
+</script>
 
 </main>
 </body>
